@@ -1,32 +1,35 @@
 # Etapa 1: Build
-FROM node:22.10-alpine AS builder
+FROM node:18-alpine AS builder
 
 WORKDIR /app
 
-# Copiar package.json y lock para instalación más rápida si no cambia código
+# Copiamos los archivos de dependencias
 COPY package*.json ./
 
-# Instalar dependencias (excluyendo dev)
+# Instalamos dependencias sin modificar el lock
 RUN npm install --frozen-lockfile
 
-# Copiar todo el código
+# Copiamos todo el proyecto, incluido .env
 COPY . .
 
-# Compilar el proyecto
+# Compilamos la app
 RUN npm run build
 
 # Etapa 2: Producción
-FROM node:22.10-alpine
+FROM node:18-alpine
 
 WORKDIR /app
 
-# Copiar solo lo necesario desde la etapa anterior
+# Copiamos package.json y node_modules desde la etapa anterior
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
 
-# Expone el puerto donde corre NestJS (por default 3000)
+# Copiamos el archivo .env
+COPY --from=builder /app/.env .env
+
+# Exponemos el puerto
 EXPOSE 3000
 
-# Comando de arranque
+# Comando de inicio
 CMD ["node", "dist/main.js"]
