@@ -1,15 +1,15 @@
-import { Module } from '@nestjs/common';
-import { CharactersModule } from './app/characters/characters.module';
-import { TypeOrmConfigModule } from './config/typeOrm.module';
-import { ConfigModule } from '@nestjs/config';
+import { Module } from '@nestjs/common'
+import { CharactersModule } from './app/characters/characters.module'
+import { TypeOrmConfigModule } from './config/typeOrm.module'
+import { ConfigModule } from '@nestjs/config'
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     CharactersModule,
-    TypeOrmConfigModule,
+    TypeOrmConfigModule
   ],
   controllers: [],
-  providers: [],
+  providers: []
 })
 export class AppModule {}

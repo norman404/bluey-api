@@ -1,47 +1,48 @@
-import { Expose, Transform } from 'class-transformer';
-import { ConfigService } from '@nestjs/config';
-import { config } from 'dotenv';
-config();
+import { Expose, Transform } from 'class-transformer'
+import { ConfigService } from '@nestjs/config'
+import { config } from 'dotenv'
+config()
 
-const configService = new ConfigService();
+const configService = new ConfigService()
 
 export class CharacterDto {
-  @Expose({ name: 'id' })
-  _id: number;
+  @Expose()
+  id: number
 
   @Expose()
-  name: string;
+  name: string
 
   @Expose()
-  age: number;
+  age: number
 
   @Expose()
-  breed: string;
+  breed: string
 
   @Expose()
-  sourceUrl: string;
+  sourceUrl: string
 
   @Expose()
-  imageUrl: string;
+  imageUrl: string
 
   @Expose()
-  episode: string[];
+  episode: string[]
 
   @Expose()
-  minisodes: string[];
+  minisodes: string[]
 
   @Expose()
-  books: string[];
+  books: string[]
 
   @Expose()
-  createdAt: Date;
+  createdAt: Date
 
   @Expose()
-  updatedAt: Date;
+  updatedAt: Date
 
   @Expose()
   @Transform(
-    ({ obj }) => `${configService.get<string>('url')}/characters/${obj.id}`
+    ({ obj }: { obj: CharacterDto }) =>
+      `${configService.get<string>('url')}/characters/${obj.id}`
   )
-  url: string;
+  url: string
 }

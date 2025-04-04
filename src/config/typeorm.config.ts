@@ -1,9 +1,9 @@
-import { DataSource } from 'typeorm';
-import { ConfigService } from '@nestjs/config';
-import { config } from 'dotenv';
-config();
+import { DataSource } from 'typeorm'
+import { ConfigService } from '@nestjs/config'
+import { config } from 'dotenv'
+config()
 
-const configService = new ConfigService();
+const configService = new ConfigService()
 
 const AppDataSource = new DataSource({
   type: 'postgres',
@@ -16,7 +16,7 @@ const AppDataSource = new DataSource({
   synchronize: false,
   migrations: ['src/database/migrations/*-migration.ts'],
   migrationsRun: false,
-  logging: true,
-});
+  logging: true
+})
 
-export default AppDataSource;
+export default AppDataSource

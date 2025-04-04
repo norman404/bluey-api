@@ -3,38 +3,38 @@ import {
   CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+  UpdateDateColumn
+} from 'typeorm'
 
 @Entity('characters')
 export class Character {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: number
 
   @Column({ length: 100 })
-  name: string;
+  name: string
 
   @Column({ length: 100 })
-  breed: string;
+  breed: string
 
   @CreateDateColumn({ name: 'created_at' })
-  createdAt: Date;
+  createdAt: Date
 
   @UpdateDateColumn({ name: 'updated_at' })
-  updatedAt: Date;
+  updatedAt: Date
 
   @Column({ name: 'source_url', nullable: true })
-  sourceUrl: string;
+  sourceUrl: string
 
   @Column({ name: 'image_url', nullable: true })
-  imageUrl: string;
+  imageUrl: string
 
   @Column('simple-array', { default: [] })
-  episode: [];
+  episode: []
 
   @Column('simple-array', { default: [] })
-  minisodes: [];
+  minisodes: []
 
   @Column('simple-array', { default: [] })
-  books: [];
+  books: []
 }
